@@ -1,0 +1,20 @@
+server:
+  profiles:
+    active: dev
+
+---
+#开发环境
+spring:
+    application:
+        name: config-dev
+    profiles: dev
+server:
+    prot: 8080
+---
+#测试环境
+spring:
+    application:
+        name: config-test
+    profiles: test
+server:
+    prot: 8090
