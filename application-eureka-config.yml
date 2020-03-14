@@ -1,8 +1,11 @@
 
+#正式环境
 spring:
+  profiles: dev
   application:
     name: config-eureka-server
-
+server:
+  port: 7000
 
 eureka:
   instance:
@@ -12,19 +15,29 @@ eureka:
     register-with-eureka: false   #指定是否向Eureka中注册当前主机
     fetch-registry: false   #指定是否能够从Eureka中获取注册列表
     service-url:
-      defaultZone: http://localhost:8000/eureka   #暴露Eureka服务中心地址，各个微服务的注册地址就是这个
+      defaultZone: http://localhost:7000/eureka   #暴露Eureka服务中心地址，各个微服务的注册地址就是这个
   server:
     renewal-percent-threshold: 0.75   #自我保护机制的阈值，默认0.85  即85%
     enable-self-preservation: false #关闭自我保护机制，默认为true
+
 ---
 #测试环境
 spring:
   profiles: test
-server:
-  port: 7000
----
-#正式环境
-spring:
-  profiles: dev
+  application:
+    name: config-eureka-server
 server:
   port: 7007
+
+eureka:
+  instance:
+    hostname: localhost #指定eurekaServer主机名
+
+  client:
+    register-with-eureka: false   #指定是否向Eureka中注册当前主机
+    fetch-registry: false   #指定是否能够从Eureka中获取注册列表
+    service-url:
+      defaultZone: http://localhost:7007/eureka   #暴露Eureka服务中心地址，各个微服务的注册地址就是这个
+  server:
+    renewal-percent-threshold: 0.75   #自我保护机制的阈值，默认0.85  即85%
+    enable-self-preservation: false #关闭自我保护机制，默认为true
