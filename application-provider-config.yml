@@ -1,0 +1,69 @@
+server:
+  port: 8080
+
+# 设置Spring-Data-JPA
+spring:
+  jpa:
+    # 指定在Spring容器启动时是否自动建表，默认为false
+    generate-ddl: true
+    # 指定是否在控制台显示其执行的SQL语句，默认false
+    show-sql: true
+    # 指定应用重启时是否重新创建更新表
+    hibernate:
+      ddl-auto: none
+
+  # 配置数据源
+  datasource:
+    type: com.mysql.cj.jdbc.MysqlDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springcloud?useUnicode=true&characterEncoding=utf8&serverTimezone=CTT
+    username: root
+    password: root
+
+
+  application:
+    name: msc-provider-8080-depart  #微服务的名称,消费者通过该名称进行消费
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka #指定要注册的eureka Server
+      #defaultZone: http://localhost:8000/erueka,http://localhost:8100/erueka,http://localhost:8200/erueka
+  instance:
+    instance-id: msc-provider-8080-depart
+
+
+info:
+  custom.name: zzp
+  custom.addr: jiangsu
+  custom.tel: 15501620577
+  custom.author: zzp
+
+
+logging:
+  # 设置日志输出格式
+  pattern:
+    console: level-%level %msg%n
+  level:
+    root: info   # 控制Spring Boot启动时的日志级别
+
+    org.hibernate: info   # 控制hibernate运行时的日志级别
+    # 在show-sql为true时，显示SQL中的动态参数值
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    # 在show-sql为true时，显示SQL查询结果
+    org.hibernate.type.descriptor.sql.BasicExtractor: trace
+
+    com.zzp.provider: debug
+
+---
+#测试环境
+spring:
+  profiles: test
+server:
+  port: 8080
+---
+#正式环境
+spring:
+  profiles: dev
+server:
+  port: 8088

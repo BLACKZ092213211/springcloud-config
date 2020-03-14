@@ -1,0 +1,51 @@
+spring:
+  application:  # 指定微服务对外暴露的名称
+    name: config-consumer-depart
+
+eureka:
+  client:
+    service-url: # 指定Eureka服务注册中心
+      defaultZone: http://localhost:8000/eureka
+      # defaultZone: http://eureka8100.com:8100/eureka,http://eureka8200.com:8200/eureka,http://eureka8300.com:8300/eureka
+
+ #灰度发布时开启
+#  instance:
+#    metadata-map:
+#      custom-mark: gray-host
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000  # 指定Feign连接提供者的超时时限
+        readTimeout: 5000    # 指定Feign从请求到获取提供者响应的超时时限
+
+  compression:
+    request:
+      enabled: true    # 开启对请求的压缩
+      # 指定对哪些MIME类型的文件进行压缩
+      mime-types: ["text/xml", "application/xml", "application/json"]
+      min-request-size: 2048  # 指定启用压缩的最小文件大小，单位字节
+    response:
+      enabled: true   # 开启对客户端响应的压缩
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+            
+---
+#测试环境
+spring:
+  profiles: test
+server:
+  port: 8090
+---
+#正式环境
+spring:
+  profiles: dev
+server:
+  port: 8099
