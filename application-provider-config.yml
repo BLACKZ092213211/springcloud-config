@@ -21,7 +21,7 @@ spring:
 
 
   application:
-    name: msc-provider-depart  #微服务的名称,消费者通过该名称进行消费
+    name: config-provider-depart  #微服务的名称,消费者通过该名称进行消费
 
 
 
