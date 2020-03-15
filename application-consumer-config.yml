@@ -44,6 +44,8 @@ eureka:
   client:
     service-url: # 指定Eureka服务注册中心
       defaultZone: http://localhost:7007/eureka
+  instance:
+    instance-id: config-provider-depart
 ---
 #正式环境
 spring:
@@ -54,3 +56,5 @@ eureka:
   client:
     service-url: # 指定Eureka服务注册中心
       defaultZone: http://localhost:7000/eureka
+  instance:
+    instance-id: config-provider-depart
