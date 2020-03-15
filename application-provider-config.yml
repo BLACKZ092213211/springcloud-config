@@ -61,7 +61,7 @@ eureka:
       defaultZone: http://localhost:7007/eureka #指定要注册的eureka Server
       #defaultZone: http://localhost:8000/erueka,http://localhost:8100/erueka,http://localhost:8200/erueka
   instance:
-    instance-id: msc-provider-depart
+    instance-id: config-provider-depart
 ---
 #正式环境
 spring:
