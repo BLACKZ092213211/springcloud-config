@@ -1,4 +1,4 @@
-suffix: czh
+suffix: czh332211
 spring:
   application:  # 指定微服务对外暴露的名称
     name: config-consumer-depart
